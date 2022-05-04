@@ -1,0 +1,6 @@
+ansible/rootKey/*
+ansible/unsealKey/*
+
+terraform/*.tfstate
+terraform/*.backup
+terraform/.terraform/*

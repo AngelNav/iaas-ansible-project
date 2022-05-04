@@ -1,0 +1,16 @@
+---
+- name: Install Vault Vagrant Development Server
+  hosts: all
+  any_errors_fatal: true
+  become: true
+  become_user: root
+  roles:
+    - {role: brianshumate.vault, vault_backend: file}
+
+- hosts: all
+  vars:
+    unseal_keys_dir_output: "{{ playbook_dir }}/unsealKey"
+    root_token_dir_output: "{{ playbook_dir }}/rootKey"
+  roles:
+    - vault-init
+    - vault-unseal
