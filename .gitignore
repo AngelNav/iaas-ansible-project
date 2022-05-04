@@ -4,3 +4,4 @@ ansible/unsealKey/*
 terraform/*.tfstate
 terraform/*.backup
 terraform/.terraform/*
+terraform/.terraform.*

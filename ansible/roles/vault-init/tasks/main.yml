@@ -13,7 +13,7 @@
   delegate_to: localhost
 
 - name: Initialise Vault operator
-  shell: vault operator init -key-shares=5 -key-threshold=3 -format=json -address={{ vault_addr }}
+  shell: vault operator init -key-shares=5 -key-threshold=3 -format json -address={{ vault_addr }}
   environment:
     VAULT_ADDR: "{{ vault_addr }}"
   register: vault_init_results
