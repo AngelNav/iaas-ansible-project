@@ -18,6 +18,7 @@ resource "azurerm_network_interface_security_group_association" "example" {
   network_security_group_id = var.security_group_id
 }
 
+# Choose image to build VM
 data "azurerm_image" "vault-image" {
   name = "VAULT-ubuntu"
   resource_group_name = var.resource_group_name
@@ -49,4 +50,12 @@ resource "azurerm_linux_virtual_machine" "vm" {
   # }
 
   source_image_id = data.azurerm_image.vault-image.id
+}
+
+# Attach to the managed disk
+resource "azurerm_virtual_machine_data_disk_attachment" "disk-attachment" {
+  managed_disk_id    = var.managed_disk_id
+  virtual_machine_id = azurerm_linux_virtual_machine.vm.id
+  lun                = "10"
+  caching            = "ReadWrite"
 }

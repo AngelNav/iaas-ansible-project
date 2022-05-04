@@ -31,6 +31,13 @@ module "publicip" {
   resource_type       = "publicip"
 }
 
+# Managed disk
+module "disk" {
+  source = "./modules/disk"
+  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+}
+
 # Create virtual machine
 module "vm" {
   source               = "./modules/vm"
@@ -39,6 +46,7 @@ module "vm" {
   public_ip_address_id = module.publicip.public_ip_address_id
   subnet_id            = module.vpc.subnet_id
   security_group_id    = module.vpc.security_group_id
+  managed_disk_id = module.disk.managed_disk_id
 }
 
 output "vpc_module_outputs" {
